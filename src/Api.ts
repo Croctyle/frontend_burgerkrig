@@ -76,7 +76,7 @@ export class Api {
       session: this.session,
       id: this.userId
     });
-    return !!ret.loginName;
+    return ret ? !!ret.loginName : false;
   }
 
   public async login(loginName: string, hash: string) {

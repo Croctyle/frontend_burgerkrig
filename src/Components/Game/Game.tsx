@@ -1,8 +1,7 @@
 import * as React from "react";
-import { inject, observer } from "mobx-react"
+import { inject, observer } from "mobx-react";
 import Unity, { UnityContent } from "react-unity-webgl";
 import { Row, Col } from "react-bootstrap";
-
 
 @inject("api")
 @observer
@@ -16,7 +15,6 @@ export class Game extends React.Component {
       "Build/bulletHellBuild.json",
       "Build/UnityLoader.js"
     );
-     
   }
 
   // replace div with id unity with:
@@ -24,14 +22,16 @@ export class Game extends React.Component {
     <Unity unityContent={this.unityContent} height="800px"/>
   */
   public render() {
-    return <div style={{display: "flex"}}>
-      <div style={{flexGrow: 0.5, background: "green", height: "800px"}}>
-        
+    return (
+      <div style={{ display: "flex" }}>
+        <div
+          style={{ flexGrow: 0.5, background: "green", height: "800px" }}
+        ></div>
+        <div style={{ flexGrow: 2, background: "ghostwite" }}>
+          <Unity unityContent={this.unityContent} height="800px" />
+        </div>
+        <div style={{ flexGrow: 0.5, background: "green" }}>3</div>
       </div>
-      <div style={{flexGrow: 2, background: "ghostwite"}}>
-        
-      </div>
-      <div style={{flexGrow: 0.5, background: "green"}}>3</div>
-    </div>;
+    );
   }
 }

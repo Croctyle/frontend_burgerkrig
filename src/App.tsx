@@ -3,9 +3,13 @@ import "./App.css";
 import { Api } from "./Api";
 import { observer, inject } from "mobx-react";
 import { observable, toJS } from "mobx";
-import { Switch, HashRouter, Route } from "react-router";
+import { Switch, Route } from "react-router";
+import { HashRouter } from "react-router-dom";
+
 import { Form, Button } from "react-bootstrap";
 import { Login } from "./Components";
+import { Profil } from "./Components";
+import { Game } from "./Components/Game/Game";
 
 interface IAppProps {
   // injected
@@ -32,7 +36,8 @@ class App extends React.Component<IAppProps> {
         <HashRouter>
           <Switch>
             <Route exact path="/" component={Login} key={"login"} />
-            <Route exact path={""} component={} key={""} />
+            <Route exact path={"/profil"} component={Profil} key={"profil"} />
+            <Route exact path={"/game"} component={Game} key={"game"} />
           </Switch>
         </HashRouter>
       </div>

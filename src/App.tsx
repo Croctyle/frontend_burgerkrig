@@ -30,13 +30,29 @@ class App extends React.Component<IAppProps> {
 
   public render() {
     if (this.loading) return <div />;
-    if (!this.isLoggedIn) return <Login />;
+    if (!this.isLoggedIn)
+      return (
+        <Login
+          onLogin={() => {
+            window.location.assign("/");
+          }}
+        />
+      );
     return (
       <div>
         <HashRouter>
           <Switch>
-            <Route exact path="/" component={Login} key={"login"} />
-            <Route exact path={"/profil"} component={Profil} key={"profil"} />
+            <Route exact path={"/"} component={Profil} key={"profil_home"} />
+            <Route
+              path={"/profil/:id"}
+              component={e => <Profil id={e.match.params.id} />}
+              key={"profil"}
+            />
+            <Route
+              path={"/profil"}
+              component={() => <Profil id={this.props.api.userId} />}
+              key={"profil_id"}
+            />
             <Route exact path={"/game"} component={Game} key={"game"} />
           </Switch>
         </HashRouter>

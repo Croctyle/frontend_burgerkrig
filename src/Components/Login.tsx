@@ -8,6 +8,8 @@ import { Form, Button } from "react-bootstrap";
 interface ILoginProps {
   // injected
   api?: Api;
+
+  onLogin: () => void;
 }
 
 @inject("api")
@@ -18,16 +20,11 @@ export class Login extends React.Component<ILoginProps> {
   @observable private data: any;
 
   @autobind
-  private onLogin() {
-    this.props.api.login(this.username, this.password);
-  }
-
-  public async componentDidMount() {
-    let data = await this.props.api.request("user.get", {
-      pagesize: 10,
-      page: 0
-    });
-    this.data = data;
+  private async onLogin() {
+    let i = await this.props.api.login(this.username, this.password);
+    if (i) {
+      this.props.onLogin();
+    }
   }
 
   public render() {
@@ -54,9 +51,10 @@ export class Login extends React.Component<ILoginProps> {
               onChange={e => (this.password = e.target.value)}
               type="password"
             />
-            <Button onClick={this.onLogin}>Login</Button>
+            <div>
+              <Button onClick={this.onLogin}>Login</Button>
+            </div>
           </Form>
-          {JSON.stringify(toJS(this.data))}
         </div>
       </div>
     );

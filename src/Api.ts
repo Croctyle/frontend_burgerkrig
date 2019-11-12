@@ -11,13 +11,13 @@ export class Api {
 
   private _userId = localStorage.getItem("userId") || "";
 
-  private get userId() {
+  public get userId() {
     return this._userId === "" || this._userId == null
       ? null
       : Number.parseInt(this._userId);
   }
 
-  private set userId(id) {
+  public set userId(id) {
     this._userId = `${id}`;
     localStorage.setItem("userId", this._userId);
   }

@@ -17,7 +17,6 @@ interface ILoginProps {
 export class Login extends React.Component<ILoginProps> {
   @observable private username: string;
   @observable private password: string;
-  @observable private data: any;
 
   @autobind
   private async onLogin() {
@@ -34,25 +33,32 @@ export class Login extends React.Component<ILoginProps> {
           style={{
             width: "50%",
             margin: "auto",
-            background: "ghostwhite",
+            background: "#ffc71e",
             height: "40em",
             marginTop: "10em",
-            textAlign: "center"
+            padding: "5em",
+            paddingTop: "5px",
           }}
         >
+          <div style={{textAlign: "center"}}>
+            <img src="bg.png" style={{width: "40%"}}/>
+          </div>
           <h3>Burger-krig</h3>
+          <h6>Sign in</h6>
           <Form>
+            <Form.Label>Username</Form.Label>
             <Form.Control
               value={this.username}
               onChange={e => (this.username = e.target.value)}
             />
+            <Form.Label>Password</Form.Label>
             <Form.Control
               value={this.password}
               onChange={e => (this.password = e.target.value)}
               type="password"
             />
             <div>
-              <Button onClick={this.onLogin}>Login</Button>
+              <Button style={{marginTop: "12px"}} onClick={this.onLogin}>Login</Button>
             </div>
           </Form>
         </div>

@@ -6,7 +6,7 @@ import { observable, toJS } from "mobx";
 import { Switch, Route } from "react-router";
 import { HashRouter } from "react-router-dom";
 
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Navbar, Nav, FormControl } from "react-bootstrap";
 import { Login } from "./Components";
 import { Profil } from "./Components";
 import { Game } from "./Components/Game/Game";
@@ -40,6 +40,18 @@ class App extends React.Component<IAppProps> {
       );
     return (
       <div>
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-info">Search</Button>
+          </Form>
+        </Navbar>
         <HashRouter>
           <Switch>
             <Route exact path={"/"} component={Profil} key={"profil_home"} />

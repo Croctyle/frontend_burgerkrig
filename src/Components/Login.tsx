@@ -38,10 +38,12 @@ export class Login extends React.Component<ILoginProps> {
             marginTop: "10em",
             padding: "5em",
             paddingTop: "5px",
+            borderRadius: "30%",
+            border: "11px solid rgb(255, 171, 19)"
           }}
         >
           <div style={{textAlign: "center"}}>
-            <img src="bg.png" style={{width: "40%"}}/>
+            <img src="logo.png" style={{width: "40%"}}/>
           </div>
           <h3>Burger-krig</h3>
           <h6>Sign in</h6>

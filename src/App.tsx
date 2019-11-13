@@ -41,16 +41,33 @@ class App extends React.Component<IAppProps> {
     return (
       <div>
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="#profil/">BurgerKrig</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#profil/">Profil</Nav.Link>
+            <Nav.Link href="#game">Game</Nav.Link>
+            {this.props.api.permissionId === 0 && (
+              <Nav.Link href="#admin">Admin</Nav.Link>
+            )}
           </Nav>
           <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <FormControl
+              type="text"
+              placeholder="Burger Soldiers"
+              className="mr-sm-2"
+            />
             <Button variant="outline-info">Search</Button>
           </Form>
+          <div style={{ paddingLeft: "4px" }}>
+            <Button
+              onClick={() => {
+                this.props.api.request("user.logout", {});
+                window.location.assign("/");
+              }}
+              variant="outline-danger"
+            >
+              Logout
+            </Button>
+          </div>
         </Navbar>
         <HashRouter>
           <Switch>

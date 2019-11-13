@@ -12,8 +12,8 @@ export class Game extends React.Component {
 
     // include this later
     this.unityContent = new UnityContent(
-      "Build/bulletHellBuild.json",
-      "Build/UnityLoader.js"
+      "BUR/Build/BUR.json",
+      "BUR/Build/UnityLoader.js"
     );
   }
 
@@ -25,10 +25,11 @@ export class Game extends React.Component {
     return (
       <div style={{ display: "flex" }}>
         <div
-          style={{ flexGrow: 0.5, background: "green", height: "800px" }}
+          style={{ flexGrow: 0.5, background: "green", height: "1200px" }}
         ></div>
-        <div style={{ flexGrow: 2, background: "ghostwite" }}>
-          <Unity unityContent={this.unityContent} height="800px" />
+        <div style={{ flexGrow: 2, background: "ghostwite", height: "600px", width: "960px" }}>
+          <Unity unityContent={this.unityContent} height="600px" width="960px"/>
+          <div style={{width: "100%", height: "100%", background: "hotpink"}}>Hello</div>
         </div>
         <div style={{ flexGrow: 0.5, background: "green" }}>3</div>
       </div>

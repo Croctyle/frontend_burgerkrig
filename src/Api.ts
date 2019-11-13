@@ -1,3 +1,14 @@
+
+
+export class IUser {
+  id: number;
+  loginName: string;
+  avatarId: number;
+  highscore: number;
+  active: boolean;
+}
+
+
 export class Api {
   private _session = localStorage.getItem("session") || "";
   private get session() {
@@ -21,6 +32,8 @@ export class Api {
     this._userId = `${id}`;
     localStorage.setItem("userId", this._userId);
   }
+
+  public self: IUser;
 
   private _permissionId = localStorage.getItem("permissionId") || "";
 
@@ -76,6 +89,8 @@ export class Api {
       session: this.session,
       id: this.userId
     });
+
+    this.self = ret;
     return ret ? !!ret.loginName : false;
   }
 

@@ -18,6 +18,8 @@ export class Login extends React.Component<ILoginProps> {
   @observable private username: string;
   @observable private password: string;
 
+  
+
   @autobind
   private async onLogin() {
     let i = await this.props.api.login(this.username, this.password);
@@ -26,44 +28,49 @@ export class Login extends React.Component<ILoginProps> {
     }
   }
 
+  @autobind
+  private async onRegister() {
+    let i = await this.props.api.register(this.username, this.password);
+    console.log(i);
+  }
+
   public render() {
     return (
-      <div style={{ display: "flex" }}>
+      <div style={{ margin: "auto", width: "50%" }}>
         <div
           style={{
-            width: "50%",
-            margin: "auto",
             background: "#ffc71e",
             height: "40em",
             marginTop: "10em",
             padding: "5em",
             paddingTop: "5px",
             borderRadius: "30%",
-            border: "11px solid rgb(255, 171, 19)"
+            border: "11px solid rgb(255, 171, 19)",
+            fontFamily: "showcard gothic",
+            color: "lightyellow"
           }}
         >
           <div style={{textAlign: "center"}}>
             <img src="logo.png" style={{width: "40%"}}/>
           </div>
-          <h3>Burger-krig</h3>
-          <h6>Sign in</h6>
+          
           <Form>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Burgername</Form.Label>
             <Form.Control
               value={this.username}
               onChange={e => (this.username = e.target.value)}
             />
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Burgerword</Form.Label>
             <Form.Control
               value={this.password}
               onChange={e => (this.password = e.target.value)}
               type="password"
             />
-            <div>
-              <Button style={{marginTop: "12px"}} onClick={this.onLogin}>Login</Button>
-            </div>
+            <Button style={{marginTop: "12px", color: "white", borderColor: "orange"}} variant="outline-warning" onClick={this.onLogin}>ORDER BURGER!</Button>
+            <Button style={{marginTop: "12px", color: "white", borderColor: "orange"}} variant="outline-warning" onClick={this.onRegister}>GET NEW BURGER!</Button>
           </Form>
         </div>
+        <small><a href="/">Datenschutzerklärung</a></small>
       </div>
     );
   }

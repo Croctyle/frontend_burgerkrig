@@ -1,0 +1,57 @@
+import * as React from "react";
+import { inject, observer } from "mobx-react";
+import { Modal } from "react-bootstrap";
+import { Api } from "../Api";
+
+interface IAvatarProps {
+    userId: number;
+    avatarId: number;
+    // injected
+    api?: Api;
+}
+
+export const Avatar = inject("api")(observer((props: IAvatarProps) => {
+    let [ show, setShow ] = React.useState(false);
+    let [ avatar, setAvatar ] = React.useState(props.avatarId);
+    return <>
+    <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton><Modal.Title>Avatar Select</Modal.Title></Modal.Header>
+        <Modal.Body>
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(avatarId => {
+                return <img
+                    onClick={async () => {
+                        let res = await props.api.request("user.setAvatar", {avatarId});
+                        props.api.self = res;
+                        setAvatar(avatarId);
+                        setShow(false)
+                    }}
+                    style={{
+                    borderRadius: "50%",
+                    border: "11px solid rgb(255, 171, 19)",
+                    marginTop: "35px"
+                }}
+                    src={`media/avatar/${avatarId}.png`}
+                    width="120px"
+                    height="120px"
+            />
+            })} 
+        </Modal.Body>
+    </Modal>
+    <img
+        onClick={() => {
+            // user will only chance his avatar anyways
+            if(props.userId === props.api.self.id) {
+                setShow(true);
+            }
+        }}
+        style={{
+        borderRadius: "50%",
+        border: "11px solid rgb(255, 171, 19)",
+        marginTop: "35px"
+        }}
+            src={`media/avatar/${avatar}.png`}
+            width="120px"
+            height="120px"
+    />
+  </>
+}))

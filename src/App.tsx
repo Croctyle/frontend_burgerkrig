@@ -40,8 +40,19 @@ class App extends React.Component<IAppProps> {
       );
     return (
       <div>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#profil/">BurgerKrig</Navbar.Brand>
+        <Navbar variant="dark" style={{ backgroundColor: "rgb(255, 171, 19)" }}>
+          <img
+            style={{
+              borderRadius: "50%",
+              border: "4px solid rgb(255, 199, 30)"
+            }}
+            src={"media/2579311_0.jpg"}
+            width="40px"
+            height="40px"
+          ></img>
+          <Navbar.Brand href="#profil/" style={{ paddingLeft: "15px" }}>
+            {this.props.api.self.loginName}
+          </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="#profil/">Profil</Nav.Link>
             <Nav.Link href="#game">Game</Nav.Link>

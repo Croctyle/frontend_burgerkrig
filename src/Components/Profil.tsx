@@ -1,7 +1,6 @@
 import * as React from "react";
 import { inject } from "mobx-react";
 import { Api } from "../Api";
-import icon from "../media/2579311_0.jpg";
 import { CheeseWrapper } from "./CheeseWrapper";
 
 export interface IProfilState {}
@@ -39,12 +38,12 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
           <img
             style={{
               borderRadius: "50%",
-              border: "3px solid steelblue",
+              border: "11px solid rgb(255, 171, 19)",
               marginTop: "35px"
             }}
-            src={icon}
-            width="80px"
-            height="80px"
+            src={"media/2579311_0.jpg"}
+            width="120px"
+            height="120px"
           ></img>
           <div
             id="stats"

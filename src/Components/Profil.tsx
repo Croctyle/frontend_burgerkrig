@@ -18,7 +18,7 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
     super(props);
     this.state = {};
   }
-
+ 
   public render(): JSX.Element {
     return (
       <div style={{ display: "flex" }}>

@@ -4,6 +4,7 @@ import { observer, inject } from "mobx-react";
 import { observable, toJS } from "mobx";
 import autobind from "autobind-decorator";
 import { Form, Button } from "react-bootstrap";
+import { Spinner } from "./Spinner";
 
 interface ILoginProps {
   // injected
@@ -51,7 +52,6 @@ export class Login extends React.Component<ILoginProps> {
           <div style={{ textAlign: "center" }}>
             <img src="logo.png" style={{ width: "40%" }} />
           </div>
-
           <Form>
             <Form.Label>Burgername</Form.Label>
             <Form.Control

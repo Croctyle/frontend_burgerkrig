@@ -42,8 +42,8 @@ export class Login extends React.Component<ILoginProps> {
             border: "11px solid rgb(255, 171, 19)"
           }}
         >
-          <div style={{textAlign: "center"}}>
-            <img src="logo.png" style={{width: "40%"}}/>
+          <div style={{ textAlign: "center" }}>
+            <img src="logo.png" style={{ width: "40%" }} />
           </div>
           <h3>Burger-krig</h3>
           <h6>Sign in</h6>
@@ -60,7 +60,9 @@ export class Login extends React.Component<ILoginProps> {
               type="password"
             />
             <div>
-              <Button style={{marginTop: "12px"}} onClick={this.onLogin}>Login</Button>
+              <Button style={{ marginTop: "12px" }} onClick={this.onLogin}>
+                Login
+              </Button>
             </div>
           </Form>
         </div>

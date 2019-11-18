@@ -2,6 +2,7 @@ import * as React from "react";
 import { inject } from "mobx-react";
 import { Api } from "../Api";
 import { CheeseWrapper } from "./CheeseWrapper";
+import { Spinner } from "./Spinner";
 
 export interface IProfilState {
   user: any;
@@ -28,9 +29,23 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
     console.log(user);
     this.setState({ user });
   }
- 
+
   public render(): JSX.Element {
-    if (!this.state.user) return <div />;
+    if (!this.state.user) {
+      return (
+        <CheeseWrapper
+          style={{
+            width: "50%",
+            height: "40em",
+            margin: "auto",
+            marginTop: "10em",
+            textAlign: "center"
+          }}
+        >
+          <Spinner />
+        </CheeseWrapper>
+      );
+    }
     return (
       <div style={{ display: "flex" }}>
         <CheeseWrapper

@@ -10,6 +10,9 @@ import { Form, Button, Navbar, Nav, FormControl } from "react-bootstrap";
 import { Login } from "./Components";
 import { Profil } from "./Components";
 import { Game } from "./Components/Game/Game";
+import { Admin } from "./Components/Admin";
+import { ActionLog } from "./Components/Game/ActionLog";
+import { Spinner } from "./Components/Spinner";
 
 interface IAppProps {
   // injected
@@ -57,8 +60,9 @@ class App extends React.Component<IAppProps> {
             <Nav.Link href="#profil/">Profil</Nav.Link>
             <Nav.Link href="#game">Game</Nav.Link>
             {this.props.api.permissionId === 0 && (
-              <Nav.Link href="#admin">Admin</Nav.Link>
+              "ADMIN"
             )}
+            <Nav.Link href="#test/">test</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl
@@ -83,6 +87,7 @@ class App extends React.Component<IAppProps> {
         <HashRouter>
           <Switch>
             <Route exact path={"/"} component={Profil} key={"profil_home"} />
+            <Route path={"/test"} component={ActionLog} key={"test"} />
             <Route
               path={"/profil/:id"}
               component={e => <Profil id={e.match.params.id} />}

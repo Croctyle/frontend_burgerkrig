@@ -2,6 +2,7 @@ import * as React from "react";
 import { inject } from "mobx-react";
 import { Api } from "../Api";
 import { CheeseWrapper } from "./CheeseWrapper";
+import { Avatar } from "./Avatar";
 import { Spinner } from "./Spinner";
 
 export interface IProfilState {
@@ -26,7 +27,6 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
     let user = await this.props.api.request("user.getById", {
       userId: this.props.id || this.props.api.userId
     });
-    console.log(user);
     this.setState({ user });
   }
 
@@ -61,16 +61,10 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
             {this.props.api.self.loginName}
           </h2>
 
-          <img
-            style={{
-              borderRadius: "50%",
-              border: "11px solid rgb(255, 171, 19)",
-              marginTop: "35px"
-            }}
-            src={"media/2579311_0.jpg"}
-            width="120px"
-            height="120px"
-          ></img>
+          <Avatar
+            avatarId={this.state.user.avatarId}
+            userId={this.state.user.id}
+          />
           <div
             id="stats"
             style={{ fontFamily: "showcard gothic", marginTop: "50px" }}

@@ -3,6 +3,8 @@ import { Api, IUser } from "../Api";
 import { FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ApiContext } from "..";
+import DropdownItem from "react-bootstrap/DropdownItem";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
 
 export function Searchbar() {
   const api = React.useContext(ApiContext);
@@ -12,7 +14,7 @@ export function Searchbar() {
   const onChange = async e => {
     setText(e.target.value);
     if (text.length >= 4) {
-      let response = await api.request("user.get", {});
+      let response = await api.request("user.get", { query: text });
       setResults(response);
     }
   };
@@ -30,7 +32,7 @@ export function Searchbar() {
         <div
           style={{
             position: "absolute",
-            bottom: "-90px",
+            bottom: "-25px",
             background: "white",
             fontFamily: "bangers",
             width: "240px",
@@ -38,15 +40,15 @@ export function Searchbar() {
             backgroundColor: "rgb(255,171,19)"
           }}
         >
-          <ul>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             {results.map((e: IUser) => {
               return (
-                <li>
+                <div>
                   <Link to={`/profil/${e.id}`}>{e.loginName}</Link>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </div>
         </div>
       )}
     </div>

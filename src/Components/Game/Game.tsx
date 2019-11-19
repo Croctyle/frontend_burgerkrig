@@ -23,6 +23,11 @@ export class Game extends React.Component<IGameProps> {
       "BUR/Build/BUR.json",
       "BUR/Build/UnityLoader.js"
     );
+
+    this.unityContent.on("sendResultJsonString", data => {
+      alert("OKKKK")
+      console.log(data);
+    })
   }
 
   @autobind

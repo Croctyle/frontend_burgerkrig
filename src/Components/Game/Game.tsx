@@ -4,10 +4,13 @@ import { ActionLog } from "./ActionLog";
 import { ApiContext } from "../..";
 import { CheeseWrapper } from "../CheeseWrapper";
 import { IUser } from "../../Api";
+import { Highscore } from "../Score/Highscore";
+import { PointList } from "../Score/Points";
 
 export function Game() {
   const api = React.useContext(ApiContext);
   let [highscores, setHighscores] = React.useState<any[]>([]);
+  let [points, setPoints] = React.useState<any[]>([]);
   const unityContent = new UnityContent(
     "BUR/Build/BUR.json",
     "BUR/Build/UnityLoader.js"
@@ -30,12 +33,6 @@ export function Game() {
     }
   });
 
-  React.useEffect(() => {
-    api.request("user.getHighscoreList",{})
-    .then(e => {
-      setHighscores(e);
-    })
-  }, [])
 
 
 
@@ -43,23 +40,22 @@ export function Game() {
   return (
     <div style={{ display: "flex" }}>
       <div
-        style={{ flexGrow: 0.5, background: "green", height: "1200px" }}
+        style={{ flexGrow: 0.5, height: "1200px" }}
       >
-        <CheeseWrapper style={{margin: "5px 8px"}}>
-          {highscores.map((e, index) => {
-            return <div>
-                {index+1}. {e.user_loginName} ({e.gameinfo_highscore})
-              </div>
-          })}
-        </CheeseWrapper>
+        <Highscore/>
+        <PointList/>
       </div>
       <div style={{ flexGrow: 2, background: "ghostwite", height: "600px", width: "960px" }}>
         <Unity unityContent={unityContent} height="600px" width="960px"/>
-        <div style={{width: "100%", height: "100%", background: "black"}}><ActionLog onNewMessage={() => {
-          api.request("user.getHighscoreList", {}).then(e => {
-            setHighscores(e)
-          })
-        }}/></div>
+        <div style={{width: "100%", height: "300px"}}>
+          <CheeseWrapper style={{height: "300px"}}>
+            <ActionLog onNewMessage={() => {
+              api.request("user.getHighscoreList", {}).then(e => {
+                setHighscores(e)
+              })
+            }}/>
+          </CheeseWrapper>
+        </div>
       </div>
     </div>
   );

@@ -24,12 +24,12 @@ export function ActionLog(props: IActionLogPros) {
   }, []);
 
   return (
-    <div style={{ height: "100%", background: "black" }}>
+    <div style={{ height: "100%", textAlign: "center" }}>
       {api.permissionId <= 10 && (
         <input
           style={{ width: "100%" }}
           value={text}
-          onChange={e => (text = e.target.value)}
+          onChange={e => (setText(e.target.value))}
           onKeyDown={e => {
             if (e.keyCode === 13) {
               api.request("user.chat", { message: text });
@@ -41,7 +41,7 @@ export function ActionLog(props: IActionLogPros) {
       {messages.map(e => {
         return (
           <>
-            <code style={{ color: e.perm === 0 ? "red" : "unset" }}>
+            <code style={{ color: "saddlebrown" }}>
               {e.message}
             </code>
             <br />

@@ -12,6 +12,7 @@ import { ActionLog } from "./Components/Game/ActionLog";
 import { Avatar } from "./Components/Avatar";
 import { Searchbar } from "./Components/Searchbar";
 import { ApiContext } from ".";
+import { Admin } from "./Components/Admin";
 
 export function App() {
   const api = useContext(ApiContext);
@@ -46,8 +47,7 @@ export function App() {
           <Nav className="mr-auto">
             <Nav.Link href="#profil/">Profil</Nav.Link>
             <Nav.Link href="#game">Game</Nav.Link>
-            {api.permissionId === 0 && "ADMIN"}
-            <Nav.Link href="#test/">test</Nav.Link>
+            {api.permissionId === 0 && <Nav.Link href="#test/">Administration</Nav.Link> }
           </Nav>
           <Form inline>
             <Searchbar />
@@ -56,7 +56,7 @@ export function App() {
           <div style={{ paddingLeft: "4px" }}>
             <Button
               onClick={() => {
-                api.request("user.logout", {});
+                api.logout();
                 window.location.assign("/");
               }}
               variant="outline-danger"
@@ -76,7 +76,7 @@ export function App() {
                   component={Profil}
                   key={"profil_home"}
                 />
-                <Route path={"/test"} component={ActionLog} key={"test"} />
+                <Route path={"/test"} component={Admin} key={"test"} />
                 <Route
                   path={"/profil/:id"}
                   component={e => <Profil id={e.match.params.id} />}

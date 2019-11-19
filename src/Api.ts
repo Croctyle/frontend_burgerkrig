@@ -58,6 +58,11 @@ export class Api {
     this.port = port || "1234";
   }
 
+  public async logout() {
+    this.session = undefined;
+    this.userId = undefined;
+  }
+
   public async request(path: string, data: any) {
     try {
       let temp = await fetch(

@@ -27,7 +27,7 @@ export function ActionLog(props: IActionLogPros) {
     <div style={{ height: "100%", textAlign: "center" }}>
       {api.permissionId <= 10 && (
         <input
-          style={{ width: "100%" }}
+          style={{ width: "100%", background: "rgb(255, 214, 90)" }}
           value={text}
           onChange={e => (setText(e.target.value))}
           onKeyDown={e => {

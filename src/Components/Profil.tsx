@@ -4,6 +4,7 @@ import { CheeseWrapper } from "./CheeseWrapper";
 import { Avatar } from "./Avatar";
 import { Spinner } from "./Spinner";
 import { ApiContext } from "..";
+import { Button } from "react-bootstrap";
 
 export interface IProfilState {
   user: any;
@@ -68,6 +69,7 @@ export const Profil: React.FC<IProfilProps> = props => {
           <h4>{user.gameinfo.timespend}</h4>
           <h2>Gesammelte Punkte Gesamt</h2>
           <h4>{user.gameinfo.points}</h4>
+          {api.permissionId === 0 && <Button onClick={() => {}}>Bann / Unbann</Button>}
         </div>
       </CheeseWrapper>
       <div>

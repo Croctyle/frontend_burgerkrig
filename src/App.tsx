@@ -39,7 +39,7 @@ export function App() {
   return (
     <div>
       <HashRouter>
-        <Navbar variant="dark" style={{ backgroundColor: "rgb(255, 171, 19)" }}>
+        <Navbar sticky="top" variant="dark" style={{ backgroundColor: "rgb(255, 171, 19)" }}>
           <Avatar avatarId={api.self.avatarId} userId={api.self.id} size={60} />
           <Navbar.Brand href="#profil/" style={{ paddingLeft: "15px" }}>
             {api.self.loginName}

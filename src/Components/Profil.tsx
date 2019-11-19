@@ -20,6 +20,7 @@ export interface IProfilProps {
 export class Profil extends React.Component<IProfilProps, IProfilState> {
   constructor(props: IProfilProps) {
     super(props);
+    console.log(props);
     this.state = { user: null };
   }
 
@@ -57,22 +58,18 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
             textAlign: "center"
           }}
         >
-          <h2 style={{ fontFamily: "showcard gothic", marginTop: "20px" }}>
-            {this.props.api.self.loginName}
-          </h2>
+          <h2 style={{ marginTop: "20px" }}>{this.state.user.loginName}</h2>
 
           <Avatar
             avatarId={this.state.user.avatarId}
             userId={this.state.user.id}
+            size={120}
           />
-          <div
-            id="stats"
-            style={{ fontFamily: "showcard gothic", marginTop: "50px" }}
-          >
+          <div id="stats" style={{ marginTop: "50px" }}>
             <h2>Dein Highscore</h2>
             <h4>{this.state.user.gameinfo.highscore}</h4>
             <h2>Abgefeuerte Gurken</h2>
-            <h4></h4>
+            <h4>{this.state.user.gameinfo.shots}</h4>
             <h2>Gesamt Spielzeit</h2>
             <h4>{this.state.user.gameinfo.timespend}</h4>
             <h2>Gesammelte Punkte Gesamt</h2>
@@ -92,24 +89,26 @@ export class Profil extends React.Component<IProfilProps, IProfilState> {
               marginLeft: "-27em"
             }}
           >
-            <div
-              id="rankinfo"
-              style={{ fontFamily: "showcard gothic", marginTop: "30px" }}
-            >
+            <div id="rankinfo" style={{ marginTop: "30px" }}>
               <h2>Aktueller Rank</h2>
               <h3 style={{ color: this.state.user.currentRank.rank_color }}>
                 {this.state.user.currentRank.rank_name}
               </h3>
-              <h2>Nächster Rank</h2>
-              <h4 style={{ color: this.state.user.nextRank.color }}>
-                {this.state.user.nextRank.name}
-              </h4>
-              <h4>In</h4>
-              <h4>
-                {this.state.user.nextRank.points -
-                  this.state.user.gameinfo.points}{" "}
-                Points
-              </h4>
+              {this.state.user.nextRank.name !==
+                this.state.user.currentRank.rank_name && (
+                <>
+                  <h2>Nächster Rank</h2>
+                  <h4 style={{ color: this.state.user.nextRank.color }}>
+                    {this.state.user.nextRank.name}
+                  </h4>
+                  <h4>In</h4>
+                  <h4>
+                    {this.state.user.nextRank.points -
+                      this.state.user.gameinfo.points}{" "}
+                    Points
+                  </h4>
+                </>
+              )}
             </div>
           </CheeseWrapper>
         </div>

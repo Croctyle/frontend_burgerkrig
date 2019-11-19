@@ -27,6 +27,10 @@ export function Searchbar() {
         className="mr-sm-2"
         value={text}
         onChange={onChange}
+        onKeyPress={e => {
+          e.preventDefault()
+          console.log("123123")
+        }}
       />
       {!!results.length && !!text.length && (
         <div

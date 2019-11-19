@@ -1,5 +1,4 @@
 import * as React from "react";
-import { inject, observer } from "mobx-react";
 import { Modal } from "react-bootstrap";
 import { Api } from "../Api";
 import { ApiContext } from "..";

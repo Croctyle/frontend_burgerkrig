@@ -2,7 +2,11 @@ import * as React from "react";
 import io from "socket.io-client";
 import { ApiContext } from "../..";
 
-export function ActionLog() {
+interface IActionLogPros {
+    onNewMessage?: () => void;
+}
+
+export function ActionLog(props: IActionLogPros) {
   let [text, setText] = React.useState("");
   let [messages, setMessage] = React.useState([]);
   const api = React.useContext(ApiContext);
@@ -12,6 +16,10 @@ export function ActionLog() {
     const client = io.connect("http://localhost:56829");
     client.on("data", data => {
       setMessage(msg => [data, ...msg]); // unshift
+      if(props.onNewMessage) {
+          // when new message, callback to provided function that something happened
+          props.onNewMessage();
+      }
     });
   }, []);
 

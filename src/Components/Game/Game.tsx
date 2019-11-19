@@ -12,7 +12,6 @@ export function Game() {
   );
 
   unityContent.on("sendResultJsonString", data => {
-    alert("OKKKK")
     console.log(data);
   })
 

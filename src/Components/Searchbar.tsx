@@ -3,13 +3,24 @@ import { Api, IUser } from "../Api";
 import { FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ApiContext } from "..";
-import DropdownItem from "react-bootstrap/DropdownItem";
-import DropdownMenu from "react-bootstrap/DropdownMenu";
+import { Avatar } from "./Avatar";
 
 export function Searchbar() {
   const api = React.useContext(ApiContext);
+  const ref = React.useRef(null);
   let [text, setText] = React.useState("");
   let [results, setResults] = React.useState<IUser[]>([]);
+
+  React.useEffect(() => {
+    const func = function(e) {
+      if (!ref.current.contains(e.target)) setResults([]);
+    };
+    document.addEventListener("mousedown", func, false);
+
+    return function cleanup() {
+      document.removeEventListener("mousedown", func, false);
+    };
+  }, []);
 
   const onChange = async e => {
     setText(e.target.value);
@@ -20,7 +31,7 @@ export function Searchbar() {
   };
 
   return (
-    <div style={{ display: "flex", position: "relative" }}>
+    <div ref={ref} style={{ display: "flex", position: "relative" }}>
       <FormControl
         type="text"
         placeholder="Burger Soldiers"
@@ -32,23 +43,33 @@ export function Searchbar() {
           console.log("123123")
         }}
       />
-      {!!results.length && !!text.length && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-25px",
-            background: "white",
-            fontFamily: "bangers",
-            width: "240px",
-            borderRadius: "4px",
-            backgroundColor: "rgb(255,171,19)"
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
+      {!!results.length && (
+        <div className="dropdown">
+          <div
+            className="dropdown-content"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             {results.map((e: IUser) => {
               return (
-                <div>
-                  <Link to={`/profil/${e.id}`}>{e.loginName}</Link>
+                <div
+                  onClick={() => {
+                    setResults([]);
+                    setText("");
+                  }}
+                >
+                  <Link to={`/profil/${e.id}`}>
+                    {" "}
+                    <div className="avatar">
+                      <Avatar
+                        avatarId={e.avatarId}
+                        userId={e.id}
+                        size={27}
+                        noBorder
+                      />
+                      &nbsp;&nbsp;
+                      {e.loginName}
+                    </div>
+                  </Link>
                 </div>
               );
             })}

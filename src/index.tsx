@@ -3,20 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { Provider } from "mobx-react";
 import { Api } from "./Api";
-const Prov: any = Provider;
 
-export const ApiContext =  React.createContext<Api>(null)
+export const ApiContext = React.createContext<Api>(null);
 
 const api = new Api();
 
 ReactDOM.render(
-  <Prov api={api}>
-    <ApiContext.Provider value={api}>
-      <App />
-    </ApiContext.Provider>
-  </Prov>,
+  <ApiContext.Provider value={api}>
+    <App />
+  </ApiContext.Provider>,
   document.getElementById("root")
 );
 

@@ -7,11 +7,15 @@ import { Provider } from "mobx-react";
 import { Api } from "./Api";
 const Prov: any = Provider;
 
+export const ApiContext =  React.createContext<Api>(null)
+
 const api = new Api();
 
 ReactDOM.render(
   <Prov api={api}>
-    <App />
+    <ApiContext.Provider value={api}>
+      <App />
+    </ApiContext.Provider>
   </Prov>,
   document.getElementById("root")
 );

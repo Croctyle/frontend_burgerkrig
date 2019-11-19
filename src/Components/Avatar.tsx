@@ -2,6 +2,7 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { Modal } from "react-bootstrap";
 import { Api } from "../Api";
+import { ApiContext } from "..";
 
 interface IAvatarProps {
   userId: number;
@@ -12,8 +13,8 @@ interface IAvatarProps {
   api?: Api;
 }
 
-export const Avatar = inject("api")(
-  observer((props: IAvatarProps) => {
+export function Avatar(props: IAvatarProps) {
+    const api = React.useContext(ApiContext);
     let [show, setShow] = React.useState(false);
     let [avatar, setAvatar] = React.useState(props.avatarId);
     return (
@@ -27,10 +28,10 @@ export const Avatar = inject("api")(
               return (
                 <img
                   onClick={async () => {
-                    let res = await props.api.request("user.setAvatar", {
+                    let res = await api.request("user.setAvatar", {
                       avatarId
                     });
-                    props.api.self = res;
+                    api.self = res;
                     setAvatar(avatarId);
                     setShow(false);
                   }}
@@ -50,7 +51,7 @@ export const Avatar = inject("api")(
         <img
           onClick={() => {
             // user will only chance his avatar anyways
-            if (props.userId === props.api.self.id) {
+            if (props.userId === api.self.id) {
               setShow(true);
             }
           }}
@@ -63,6 +64,5 @@ export const Avatar = inject("api")(
           height={`${props.size ? props.size : 120}px`}
         />
       </>
-    );
-  })
-);
+    )
+}

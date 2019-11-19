@@ -6,5 +6,5 @@ interface ISpinnerProps {
 }
 
 export function Spinner(props: ISpinnerProps){
-        return <img className={props.freeze ? "" : "spinner"} style={{width: props.sm ? "32px" : ""}} src={"logo.png"}/>
+    return <img className={props.freeze ? "" : "spinner"} style={{width: props.sm ? "32px" : ""}} src={"logo.png"}/>
 }

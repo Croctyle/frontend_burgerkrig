@@ -49,15 +49,18 @@ export const Profil: React.FC<IProfilProps> = props => {
   return (
     <div style={{ display: "flex" }}>
       <CheeseWrapper
+        showcheese
         style={{
           width: "50%",
           height: "40em",
           margin: "auto",
-          marginTop: "10em",
+          marginTop: "7em",
           textAlign: "center"
         }}
       >
-        <h2 style={{ marginTop: "20px" }}>{user.loginName}</h2>
+        <h1 style={{ marginTop: "20px", fontWeight: "bold" }}>
+          {user.loginName}
+        </h1>
 
         <Avatar avatarId={user.avatarId} userId={user.id} size={120} />
         <div id="stats" style={{ marginTop: "50px" }}>
@@ -69,11 +72,14 @@ export const Profil: React.FC<IProfilProps> = props => {
           <h4>{user.gameinfo.timespend}</h4>
           <h2>Gesammelte Punkte Gesamt</h2>
           <h4>{user.gameinfo.points}</h4>
-          {api.permissionId === 0 && <Button onClick={() => {}}>Bann / Unbann</Button>}
+          {api.permissionId === 0 && (
+            <Button onClick={() => {}}>Bann / Unbann</Button>
+          )}
         </div>
       </CheeseWrapper>
       <div>
         <CheeseWrapper
+          showcheese
           style={{
             width: "20%",
             height: "20em",

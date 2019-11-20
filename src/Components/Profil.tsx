@@ -4,7 +4,8 @@ import { CheeseWrapper } from "./CheeseWrapper";
 import { Avatar } from "./Avatar";
 import { Spinner } from "./Spinner";
 import { ApiContext } from "..";
-import { Button } from "react-bootstrap";
+import { Button, Badge } from "react-bootstrap";
+import { PermissionSelect } from "./PermissionSelect";
 
 export interface IProfilState {
   user: any;
@@ -50,14 +51,13 @@ export const Profil: React.FC<IProfilProps> = props => {
     <div style={{ display: "flex" }}>
       <CheeseWrapper
         style={{
-          width: "50%",
-          height: "40em",
           margin: "auto",
           marginTop: "10em",
-          textAlign: "center"
+          textAlign: "center",
+          padding: "30px"
         }}
       >
-        <h2 style={{ marginTop: "20px" }}>{user.loginName}</h2>
+        <h2 style={{ marginTop: "20px" }}>{user.loginName}{!user.active && <Badge variant="danger">BANNED</Badge>}</h2>
 
         <Avatar avatarId={user.avatarId} userId={user.id} size={120} />
         <div id="stats" style={{ marginTop: "50px" }}>
@@ -66,10 +66,22 @@ export const Profil: React.FC<IProfilProps> = props => {
           <h2>Abgefeuerte Gurken</h2>
           <h4>{user.gameinfo.shots}</h4>
           <h2>Gesamt Spielzeit</h2>
-          <h4>{user.gameinfo.timespend}</h4>
+          <h4>{Math.floor(user.gameinfo.timeSpend / 60)} min</h4>
           <h2>Gesammelte Punkte Gesamt</h2>
           <h4>{user.gameinfo.points}</h4>
-          {api.permissionId === 0 && <Button onClick={() => {}}>Bann / Unbann</Button>}
+          {api.permissionId === 0 && <>
+            <Button onClick={() => {
+              api.request("user.setActive", {id: user.id, active: !user.active}).then(e => alert("Ok"));
+              }}>
+                Bann / Unbann
+            </Button>
+            <Button onClick={() => {
+              api.request("user.deleteData", {id: user.id}).then(e => alert("Ok"));
+              }}>
+                DELETE MATCHES
+            </Button>
+            <PermissionSelect onChange={(e) => api.request("user.setPermission", {id: user.id, permission: Number.parseInt(e.target.value)})} defaultValue={user.permission.id}/>
+          </>}
         </div>
       </CheeseWrapper>
       <div>

@@ -13,7 +13,7 @@ export function ActionLog(props: IActionLogPros) {
 
   // to run function ONCE! Use empty
   React.useEffect(() => {
-    const client = io.connect("http://localhost:56829");
+    const client = io.connect("http://localhost:56829", {query: 'session='+api.session+'&id='+api.userId});
     client.on("data", data => {
       setMessage(msg => [data, ...msg]); // unshift
       if(props.onNewMessage) {
@@ -25,7 +25,6 @@ export function ActionLog(props: IActionLogPros) {
 
   return (
     <div style={{ height: "100%", textAlign: "center" }}>
-      {api.permissionId <= 10 && (
         <input
           style={{ width: "100%", background: "rgb(255, 214, 90)" }}
           value={text}
@@ -37,17 +36,18 @@ export function ActionLog(props: IActionLogPros) {
             }
           }}
         />
-      )}
-      {messages.map(e => {
-        return (
-          <>
-            <code style={{ color: "saddlebrown" }}>
-              {e.message}
-            </code>
-            <br />
-          </>
-        );
-      })}
+      <div style={{height: "200px", overflow: "auto"}}>
+        {messages.map(e => {
+          return (
+            <>
+              <code style={{ color: "saddlebrown" }}>
+                {e.message}
+              </code>
+              <br />
+            </>
+          );
+        })}
+      </div>
     </div>
   );
 }

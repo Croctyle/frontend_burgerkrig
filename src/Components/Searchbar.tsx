@@ -24,8 +24,8 @@ export function Searchbar() {
 
   const onChange = async e => {
     setText(e.target.value);
-    if (text.length >= 4) {
-      let response = await api.request("user.get", { query: text });
+    if (text.length >= 3) {
+      let response = await api.request("user.search", { query: text });
       setResults(response);
     }
   };
@@ -38,10 +38,6 @@ export function Searchbar() {
         className="mr-sm-2"
         value={text}
         onChange={onChange}
-        onKeyPress={e => {
-          e.preventDefault()
-          console.log("123123")
-        }}
       />
       {!!results.length && (
         <div className="dropdown">

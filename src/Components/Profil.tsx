@@ -50,9 +50,10 @@ export const Profil: React.FC<IProfilProps> = props => {
   return (
     <div style={{ display: "flex" }}>
       <CheeseWrapper
+        showcheese
         style={{
           margin: "auto",
-          marginTop: "10em",
+          marginTop: "7em",
           textAlign: "center",
           padding: "30px"
         }}
@@ -86,6 +87,7 @@ export const Profil: React.FC<IProfilProps> = props => {
       </CheeseWrapper>
       <div>
         <CheeseWrapper
+          showcheese
           style={{
             width: "20%",
             height: "20em",

@@ -39,15 +39,28 @@ export function App() {
   return (
     <div>
       <HashRouter>
-        <Navbar sticky="top" variant="dark" style={{ backgroundColor: "rgb(255, 171, 19)" }}>
+        <Navbar
+          sticky="top"
+          variant="dark"
+          style={{
+            backgroundColor: "rgb(255, 171, 19)",
+            boxShadow: "-10px 3px 15px -3px rgb(116, 44, 44)"
+          }}
+        >
           <Avatar avatarId={api.self.avatarId} userId={api.self.id} size={60} />
           <Navbar.Brand href="#profil/" style={{ paddingLeft: "15px" }}>
             {api.self.loginName}
           </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#profil/">Profil</Nav.Link>
-            <Nav.Link href="#game">Game</Nav.Link>
-            {api.permissionId === 0 && <Nav.Link href="#test/">Administration</Nav.Link> }
+            <Nav.Link className="navlink" href="#profil/">
+              Profil
+            </Nav.Link>
+            <Nav.Link className="navlink" href="#game">
+              Game
+            </Nav.Link>
+            {api.permissionId === 0 && (
+              <Nav.Link href="#test/">Administration</Nav.Link>
+            )}
           </Nav>
           <Form inline>
             <Searchbar />

@@ -62,6 +62,7 @@ code {
   border-radius: 5px;
   margin-top: 46px;
   padding-right: 5px;
+  box-shadow: 0px 8px 16px 0px rgb(116, 44, 44);
 }
 .dropdown-content a {
   color: rgb(49, 151, 36);
@@ -73,4 +74,35 @@ code {
 .avatar {
   display: inline-block;
   padding-right: 5px;
+}
+.loginbutton {
+  margin-top: 15px;
+  color: whitesmoke;
+  border-color: rgb(138, 67, 10);
+  background-color: rgba(65, 35, 16, 0.932);
+  box-shadow: 0px 8px 16px 0px rgb(116, 44, 44);
+  margin-left: 196px;
+}
+.loginbutton:hover {
+  background-color: rgba(131, 61, 18, 0.932);
+  border-color: rgb(97, 49, 9);
+}
+.registerbutton {
+  margin-top: 15px;
+  color: whitesmoke;
+  border-color: rgb(138, 67, 10);
+  background-color: rgba(65, 35, 16, 0.932);
+  box-shadow: 0px 8px 16px 0px rgb(116, 44, 44);
+}
+.registerbutton:hover {
+  background-color: rgba(131, 61, 18, 0.932);
+  border-color: rgb(97, 49, 9);
+}
+.mask {
+  background-image: url("./Components/cheeseslice.png") !important;
+  background-size: 722px 636px !important;
+  box-shadow: 0px 8px 16px 0px rgb(116, 44, 44) !important;
+}
+.navlink:hover {
+  color: black !important;
 }

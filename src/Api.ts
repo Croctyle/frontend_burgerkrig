@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 import * as Cookie from "js-cookie";
 
 
->>>>>>> ddfe0e23ab769ce7d6f7c9d30e83062e652db7de
 export class IUser {
   id: number;
   loginName: string;

@@ -1,6 +1,9 @@
+<<<<<<< HEAD
+=======
 import * as Cookie from "js-cookie";
 
 
+>>>>>>> ddfe0e23ab769ce7d6f7c9d30e83062e652db7de
 export class IUser {
   id: number;
   loginName: string;
@@ -8,7 +11,6 @@ export class IUser {
   highscore: number;
   active: boolean;
 }
-
 
 export class Api {
   public get session() {
@@ -118,7 +120,7 @@ export class Api {
     }
   }
 
-  public async register(loginName: string, hash: string) {
+  public async register(loginName: string, hash: string, avatarId: number) {
     try {
       let temp = await fetch(
         `${this.protocol}://${this.host}:${this.port}/register`,
@@ -130,7 +132,8 @@ export class Api {
           body: JSON.stringify({
             data: {
               loginName,
-              hash
+              hash,
+              avatarId
             }
           })
         }

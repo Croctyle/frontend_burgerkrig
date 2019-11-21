@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import * as Cookie from "js-cookie";
+
+
+>>>>>>> ddfe0e23ab769ce7d6f7c9d30e83062e652db7de
 export class IUser {
   id: number;
   loginName: string;
@@ -7,42 +13,31 @@ export class IUser {
 }
 
 export class Api {
-  private _session = localStorage.getItem("session") || "";
-  private get session() {
-    return this._session;
+  public get session() {
+    return Cookie.get("session");
   }
 
-  private set session(session: string) {
-    this._session = session;
-    localStorage.setItem("session", this._session);
+  public set session(session: string) {
+    Cookie.set("session", session);
   }
 
-  private _userId = localStorage.getItem("userId") || "";
 
   public get userId() {
-    return this._userId === "" || this._userId == null
-      ? null
-      : Number.parseInt(this._userId);
+    return Number.parseInt(Cookie.get("userId"));
   }
 
   public set userId(id) {
-    this._userId = `${id}`;
-    localStorage.setItem("userId", this._userId);
+    Cookie.set("userId", id)
   }
 
   public self: IUser;
 
-  private _permissionId = localStorage.getItem("permissionId") || "";
-
   public get permissionId() {
-    return this._permissionId === "" || this._permissionId == null
-      ? null
-      : Number.parseInt(this._permissionId);
+    return Number.parseInt(Cookie.get("permissionId"))
   }
 
   public set permissionId(id) {
-    this._permissionId = `${id}`;
-    localStorage.setItem("permissionId", this._permissionId);
+    Cookie.set("permissionId", id);
   }
 
   private host: string;
@@ -78,8 +73,8 @@ export class Api {
         }
       );
       let json = await temp.json();
-      this.session = json.session;
-      this.userId = json.userId;
+      // this.session = json.session;
+      // this.userId = json.userId;
       return json.data;
     } catch (err) {
       console.error(err);

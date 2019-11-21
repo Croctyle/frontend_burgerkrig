@@ -18,7 +18,7 @@ export function Admin() {
             <Col xs={12} md={6}>
                 <CheeseWrapper>
                     <div style={{padding: "40px 40px"}}>
-                        <UserTable/>
+                        <Tickets/>
                     </div>
                 </CheeseWrapper>
             </Col>
@@ -27,44 +27,18 @@ export function Admin() {
 }
 
 
-function UserTable() {
+function Tickets() {
     const api = React.useContext(ApiContext);
     
-    let [ userdata, setUserdata ] = React.useState<any[]>(null);
-    let [ permissions, setPermissions ] = React.useState<any[]>(null);
+    let [ ticketdata, setTicketdata ] = React.useState<any[]>([{t:""}]);
 
     React.useEffect(() => {
-        api.request("user.get", {}).then(e => setUserdata(e));
-        api.request("permission.get", {}).then(e => setPermissions(e));
-    }, []);
-
-    // in case we dont have anything yet
-    if(!(permissions && userdata)) return <div/>
-
-    const renderOptions = (onClick: () => void, defaultValue: string) => {
-        return <Form.Control defaultValue={defaultValue} as="select" onChange={(e) => console.log(e)}>
-            {permissions.map(e => <option value={e.id}>{e.permissionName}</option>)}
-        </Form.Control>
-    }
-
-    const renderCell = (user) => {
-        return <tr>
-            <td>{user.loginName}</td>
-            <td>{renderOptions(() => {}, user.permission.id)}</td>
-        </tr>
-    }
-
-
+        api.request("user.getTickets", {}).then(e => setTicketdata(e));
+    }, [])
     return <div> 
-        <table>
-            <th>
-                <td>Name</td>
-                <td>Rights</td>
-            </th>
-            {userdata.map(e => {
-                return renderCell(e)
-            })}
-        </table>
+        {ticketdata.map(e => {
+            JSON.stringify(e)
+        })}
     </div>
     
 }

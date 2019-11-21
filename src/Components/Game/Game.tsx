@@ -46,7 +46,7 @@ export function Game() {
         <PointList/>
       </div>
       <div style={{ flexGrow: 2, background: "ghostwite", height: "600px", width: "960px" }}>
-        <Unity unityContent={unityContent} height="600px" width="960px"/>
+        <Unity unityContent={unityContent} height="600x" width="960px"/>
         <div style={{width: "100%", height: "300px"}}>
           <CheeseWrapper style={{height: "300px"}}>
             <ActionLog onNewMessage={() => {

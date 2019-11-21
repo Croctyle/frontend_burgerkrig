@@ -4,8 +4,10 @@ import { CheeseWrapper } from "./CheeseWrapper";
 import { Avatar } from "./Avatar";
 import { Spinner } from "./Spinner";
 import { ApiContext } from "..";
-import { Button, Badge } from "react-bootstrap";
+import { Button, Badge, Dropdown } from "react-bootstrap";
 import { PermissionSelect } from "./PermissionSelect";
+import { Highscore } from "./Score/Highscore";
+import { PointList } from "./Score/Points";
 
 export interface IProfilState {
   user: any;
@@ -48,14 +50,18 @@ export const Profil: React.FC<IProfilProps> = props => {
   }
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+      <div >
+        <Highscore/>
+        <PointList/>
+      </div>
       <CheeseWrapper
         showcheese
         style={{
-          margin: "auto",
           marginTop: "7em",
           textAlign: "center",
-          padding: "30px"
+          padding: "30px",
+          width: "800px"
         }}
       >
         <h2 style={{ marginTop: "20px" }}>{user.loginName}{!user.active && <Badge variant="danger">BANNED</Badge>}</h2>
@@ -85,18 +91,13 @@ export const Profil: React.FC<IProfilProps> = props => {
           </>}
         </div>
       </CheeseWrapper>
-      <div>
         <CheeseWrapper
           showcheese
           style={{
             width: "20%",
             height: "20em",
-            margin: "auto",
             marginTop: "8em",
             textAlign: "center",
-            position: "absolute",
-            display: "inlineblock",
-            marginLeft: "-27em"
           }}
         >
           <div id="rankinfo" style={{ marginTop: "30px" }}>
@@ -116,7 +117,6 @@ export const Profil: React.FC<IProfilProps> = props => {
             )}
           </div>
         </CheeseWrapper>
-      </div>
     </div>
   );
 };

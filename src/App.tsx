@@ -4,7 +4,7 @@ import { Api } from "./Api";
 import { Switch, Route } from "react-router";
 import { HashRouter } from "react-router-dom";
 
-import { Form, Button, Navbar, Nav } from "react-bootstrap";
+import { Form, Button, Navbar, Nav, Modal, FormControl, NavDropdown, ButtonGroup } from "react-bootstrap";
 import { Login } from "./Components";
 import { Profil } from "./Components";
 import { Game } from "./Components/Game/Game";
@@ -18,6 +18,8 @@ export function App() {
   const api = useContext(ApiContext);
   let [isLoggedIn, setLoggedIn] = useState(false);
   let [loading, setLoading] = useState(true);
+  let [ticket, setTicket] = useState("");
+  let [show, setShow] = React.useState(false);
 
   useEffect(() => {
     api.validate().then(e => {
@@ -38,6 +40,23 @@ export function App() {
   }
   return (
     <div>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Data deletion Request</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <FormControl as="textarea" vaule={ticket} onChange={(e: any) => setTicket(e.target.value)}/>
+        </Modal.Body>
+        <Modal.Footer><Button onClick={async () => {
+          if(ticket === "") {
+            alert("Must contain text!");
+            return;
+          }
+          await api.request("user.addTicket", {author: api.userId, ticket});
+          setShow(false)
+          setTicket("");
+        }}>Send Request</Button></Modal.Footer>
+      </Modal>
       <HashRouter>
         <Navbar
           sticky="top"
@@ -51,6 +70,7 @@ export function App() {
           <Navbar.Brand href="#profil/" style={{ paddingLeft: "15px" }}>
             {api.self.loginName}
           </Navbar.Brand>
+          
           <Nav className="mr-auto">
             <Nav.Link className="navlink" href="#profil/">
               Profil
@@ -61,22 +81,38 @@ export function App() {
             {api.permissionId === 0 && (
               <Nav.Link href="#test/">Administration</Nav.Link>
             )}
+          
+          </Nav>
+          <Nav>
+          <NavDropdown title="?" id="drpdown">
+              <NavDropdown.Item
+                onClick={() => {
+                  setShow(true)
+                }}
+              >
+                Delete Data
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Form inline>
             <Searchbar />
             <Button variant="outline-info">Search</Button>
           </Form>
           <div style={{ paddingLeft: "4px" }}>
-            <Button
-              onClick={() => {
-                api.logout();
-                window.location.assign("/");
-              }}
-              variant="outline-danger"
-            >
-              Logout
-            </Button>
+            <ButtonGroup>
+              <Button
+                onClick={() => {
+                  api.logout();
+                  window.location.assign("/");
+                }}
+                variant="outline-danger"
+              >
+                Logout
+              </Button>
+            </ButtonGroup>
+
           </div>
+          
         </Navbar>
         {/** https://github.com/ReactTraining/react-router/issues/5455#issuecomment-346502188 */}
         <Route

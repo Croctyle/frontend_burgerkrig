@@ -1,5 +1,3 @@
-
-
 export class IUser {
   id: number;
   loginName: string;
@@ -7,7 +5,6 @@ export class IUser {
   highscore: number;
   active: boolean;
 }
-
 
 export class Api {
   private _session = localStorage.getItem("session") || "";
@@ -128,7 +125,7 @@ export class Api {
     }
   }
 
-  public async register(loginName: string, hash: string) {
+  public async register(loginName: string, hash: string, avatarId: number) {
     try {
       let temp = await fetch(
         `${this.protocol}://${this.host}:${this.port}/register`,
@@ -140,7 +137,8 @@ export class Api {
           body: JSON.stringify({
             data: {
               loginName,
-              hash
+              hash,
+              avatarId
             }
           })
         }

@@ -4,7 +4,7 @@ import { Api } from "../Api";
 import { ApiContext } from "..";
 
 interface IAvatarProps {
-  userId: number;
+  userId?: number;
   avatarId: number;
   size: number;
   noBorder?: boolean;
@@ -16,6 +16,11 @@ export function Avatar(props: IAvatarProps) {
   const api = React.useContext(ApiContext);
   let [show, setShow] = React.useState(false);
   let [avatar, setAvatar] = React.useState(props.avatarId);
+
+  React.useEffect(() => {
+    setAvatar(props.avatarId);
+  }, [props.avatarId]);
+
   return (
     <>
       <Modal show={show} onHide={() => setShow(false)}>
@@ -50,6 +55,7 @@ export function Avatar(props: IAvatarProps) {
       <img
         onClick={() => {
           // user will only chance his avatar anyways
+          if (!props.userId) return;
           if (props.userId === api.self.id) {
             setShow(true);
           }

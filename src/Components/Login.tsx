@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Api } from "../Api";
-import { Form, Button, Modal, Dropdown } from "react-bootstrap";
+import { Form, Button, Modal, Dropdown, Alert } from "react-bootstrap";
 import { ApiContext } from "..";
 import { Avatar } from "./Avatar";
 
@@ -17,16 +17,27 @@ export function Login(props: ILoginProps) {
   let [password, setPassword] = React.useState("");
   let [show, setShow] = React.useState(false);
   let [burger, setBurger] = React.useState(0);
+  let [error, setError] = React.useState("");
+  let [registerError, setRegisterError] = React.useState("");
 
   const onLogin = async () => {
     let i = await api.login(username, password);
-    if (i) props.onLogin();
+    if(i.login) {
+      props.onLogin();
+    } else {
+      setError(i.data.data.error)
+    }
   };
 
   const onRegister = async () => {
     if (username.length === 0 || password.length === 0) return;
-    api.register(username, password, burger);
-    setShow(false);
+    let i = await api.register(username, password, burger);
+    if(!i.data) {
+      setRegisterError("Name already taken!");
+    } else {
+      setShow(false);
+      setRegisterError("");
+    }
   };
 
   return (
@@ -111,6 +122,7 @@ export function Login(props: ILoginProps) {
               type="password"
             />
           </Form>
+          {registerError && <Alert variant="danger">{registerError}</Alert>}
         </Modal.Body>
         <Modal.Footer
           style={{
@@ -199,6 +211,7 @@ export function Login(props: ILoginProps) {
               <Button className="registerbutton" onClick={() => setShow(true)}>
                 REGISTER NEW BURGER!
               </Button>
+              {error && <Alert variant="danger">{error}</Alert>}
               <div style={{ marginTop: "101px", paddingLeft: "504px" }}>
                 <small>
                   <a style={{ color: "saddlebrown" }} href="/">

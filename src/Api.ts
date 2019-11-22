@@ -110,8 +110,16 @@ export class Api {
         this.session = json.data.session;
         this.userId = json.data.userId;
         this.permissionId = json.data.permissionId;
-        return true;
-      } else return false;
+        return {
+          login: true,
+          data: json.data
+        }
+      } else {
+        return {
+          login: false,
+          data: json.data
+        }
+      };
     } catch (err) {
       console.log(err);
     }
@@ -136,7 +144,6 @@ export class Api {
         }
       );
       let json = await temp.json();
-      console.log(json);
       return json;
     } catch (err) {
       console.log(err);

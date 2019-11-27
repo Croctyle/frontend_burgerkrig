@@ -9,8 +9,6 @@ import { PointList } from "../Score/Points";
 
 export function Game() {
   const api = React.useContext(ApiContext);
-  let [highscores, setHighscores] = React.useState<any[]>([]);
-  let [points, setPoints] = React.useState<any[]>([]);
   const unityContent = new UnityContent(
     "BUR/Build/BUR.json",
     "BUR/Build/UnityLoader.js"

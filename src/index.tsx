@@ -3,16 +3,23 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
+import reducers from "./reducer";
 import { Api } from "./Api";
 
-export const ApiContext = React.createContext<Api>(null);
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
-const api = new Api();
+export const ApiContext = React.createContext<Api>(null);
+export const store = createStore(reducers);
+
+export const api = new Api();
 
 ReactDOM.render(
-  <ApiContext.Provider value={api}>
-    <App />
-  </ApiContext.Provider>,
+  <Provider store={store}>
+    <ApiContext.Provider value={api}>
+      <App />
+    </ApiContext.Provider>
+  </Provider>,
   document.getElementById("root")
 );
 

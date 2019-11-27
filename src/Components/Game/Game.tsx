@@ -49,11 +49,7 @@ export function Game() {
         <Unity unityContent={unityContent} height="600x" width="960px"/>
         <div style={{width: "100%", height: "300px"}}>
           <CheeseWrapper style={{height: "300px"}}>
-            <ActionLog onNewMessage={() => {
-              api.request("user.getHighscoreList", {}).then(e => {
-                setHighscores(e)
-              })
-            }}/>
+            <ActionLog />
           </CheeseWrapper>
         </div>
       </div>

@@ -1,10 +1,20 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useSelector } from "react-redux";
+import { ApiContext } from "../..";
 import { CheeseWrapper } from "../CheeseWrapper";
 
 export function Highscore() {
+    const api = useContext(ApiContext);
+    let [ list, setList ] = useState([]);
 
-    const list = useSelector(state => state.highscore)
+    // on mount
+    useEffect(() => {
+        api
+        .request("user.getHighscoreList", {})
+        .then((e) => {
+            setList(e)
+        })
+    }, []);
+
     return <CheeseWrapper style={{margin: "5px 8px", padding: "20px"}}>
         Highscores
         {list.map((e, index) => {

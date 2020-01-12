@@ -37,12 +37,6 @@ export function Game() {
 
   return (
     <div style={{ display: "flex" }}>
-      <div
-        style={{ flexGrow: 0.5, height: "1200px" }}
-      >
-        <Highscore/>
-        <PointList/>
-      </div>
       <div style={{ flexGrow: 2, background: "ghostwite", height: "600px", width: "960px" }}>
         <Unity unityContent={unityContent} height="600x" width="960px"/>
         <div style={{width: "100%", height: "300px"}}>

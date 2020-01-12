@@ -42,7 +42,7 @@ export class Api {
   private protocol: string;
 
   constructor(host?: string, port?: string, protocol?: string) {
-    this.host = host || "localhost";
+    this.host = host || "www.nycaria.de";
     this.protocol = protocol || "http";
     this.port = port || "1234";
   }

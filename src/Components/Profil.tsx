@@ -92,7 +92,6 @@ export const Profil: React.FC<IProfilProps> = props => {
         </div>
       </CheeseWrapper>
         <CheeseWrapper
-          showcheese
           style={{
             width: "20%",
             height: "20em",

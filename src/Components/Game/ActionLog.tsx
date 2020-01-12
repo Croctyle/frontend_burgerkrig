@@ -13,7 +13,7 @@ export function ActionLog(props: IActionLogPros) {
 
   // to run function ONCE! Use empty
   React.useEffect(() => {
-    const client = io.connect("http://localhost:56829", {query: 'session='+api.session+'&id='+api.userId});
+    const client = io.connect("http://www.nycaria.de:56829", {query: 'session='+api.session+'&id='+api.userId});
     client.on("data", data => {
       setMessage(msg => [data, ...msg]); // unshift
       if(props.onNewMessage) {

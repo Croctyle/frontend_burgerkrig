@@ -15,6 +15,8 @@ export function Login(props: ILoginProps) {
   const api = React.useContext(ApiContext);
   let [username, setUsername] = React.useState("");
   let [password, setPassword] = React.useState("");
+  let [registerUsername, setRegisterUsername] = React.useState("");
+  let [registerPassword, setRegisterPassword] = React.useState("");
   let [show, setShow] = React.useState(false);
   let [burger, setBurger] = React.useState(0);
   let [error, setError] = React.useState("");
@@ -22,17 +24,17 @@ export function Login(props: ILoginProps) {
 
   const onLogin = async () => {
     let i = await api.login(username, password);
-    if(i.login) {
+    if (i.login) {
       props.onLogin();
     } else {
-      setError(i.data.data.error)
+      setError(i.data.data.error);
     }
   };
 
   const onRegister = async () => {
     if (username.length === 0 || password.length === 0) return;
     let i = await api.register(username, password, burger);
-    if(!i.data) {
+    if (!i.data) {
       setRegisterError("Name already taken!");
     } else {
       setShow(false);
@@ -96,9 +98,9 @@ export function Login(props: ILoginProps) {
                 width: "50%",
                 marginRight: "auto"
               }}
-              value={username}
+              value={registerUsername}
               placeholder="Login Name"
-              onChange={e => setUsername(e.target.value)}
+              onChange={e => setRegisterUsername(e.target.value)}
             />
             <Form.Label
               style={{
@@ -117,8 +119,8 @@ export function Login(props: ILoginProps) {
                 marginRight: "auto"
               }}
               placeholder="Passwort"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={registerPassword}
+              onChange={e => setRegisterPassword(e.target.value)}
               type="password"
             />
           </Form>

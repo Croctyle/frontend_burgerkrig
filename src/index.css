@@ -87,6 +87,19 @@ code {
   background-color: rgba(131, 61, 18, 0.932);
   border-color: rgb(97, 49, 9);
 }
+.discordbutton {
+  margin-top: 15px;
+  color: whitesmoke;
+  border-color: rgb(138, 67, 10);
+  background-color: rgba(65, 35, 16, 0.932);
+  box-shadow: 0px 8px 16px 0px rgb(116, 44, 44);
+  margin-left: 196px;
+}
+.discordbutton:hover {
+  background-color: rgba(131, 61, 18, 0.932);
+  border-color: rgb(97, 49, 9);
+}
+
 .registerbutton {
   margin-top: 15px;
   color: whitesmoke;

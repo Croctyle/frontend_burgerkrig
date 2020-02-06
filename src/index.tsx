@@ -5,15 +5,14 @@ import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Api } from "./Api";
 
-
 export const ApiContext = React.createContext<Api>(null);
 
-export const api = new Api();
+export const api = new Api("localhost", "1234", "http");
 
 ReactDOM.render(
-    <ApiContext.Provider value={api}>
-      <App />
-    </ApiContext.Provider>,
+  <ApiContext.Provider value={api}>
+    <App />
+  </ApiContext.Provider>,
   document.getElementById("root")
 );
 

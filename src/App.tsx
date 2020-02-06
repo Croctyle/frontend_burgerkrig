@@ -4,7 +4,16 @@ import { Api } from "./Api";
 import { Switch, Route } from "react-router";
 import { HashRouter } from "react-router-dom";
 
-import { Form, Button, Navbar, Nav, Modal, FormControl, NavDropdown, ButtonGroup } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Navbar,
+  Nav,
+  Modal,
+  FormControl,
+  NavDropdown,
+  ButtonGroup
+} from "react-bootstrap";
 import { Login } from "./Components";
 import { Profil } from "./Components";
 import { Game } from "./Components/Game/Game";
@@ -13,6 +22,7 @@ import { Avatar } from "./Components/Avatar";
 import { Searchbar } from "./Components/Searchbar";
 import { ApiContext } from ".";
 import { Admin } from "./Components/Admin";
+import { Discord } from "./Components/Discord";
 
 export function App() {
   const api = useContext(ApiContext);
@@ -45,17 +55,30 @@ export function App() {
           <Modal.Title>Data deletion Request</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormControl as="textarea" vaule={ticket} onChange={(e: any) => setTicket(e.target.value)}/>
+          <FormControl
+            as="textarea"
+            vaule={ticket}
+            onChange={(e: any) => setTicket(e.target.value)}
+          />
         </Modal.Body>
-        <Modal.Footer><Button onClick={async () => {
-          if(ticket === "") {
-            alert("Must contain text!");
-            return;
-          }
-          await api.request("user.addTicket", {author: api.userId, ticket});
-          setShow(false)
-          setTicket("");
-        }}>Send Request</Button></Modal.Footer>
+        <Modal.Footer>
+          <Button
+            onClick={async () => {
+              if (ticket === "") {
+                alert("Must contain text!");
+                return;
+              }
+              await api.request("user.addTicket", {
+                author: api.userId,
+                ticket
+              });
+              setShow(false);
+              setTicket("");
+            }}
+          >
+            Send Request
+          </Button>
+        </Modal.Footer>
       </Modal>
       <HashRouter>
         <Navbar
@@ -70,7 +93,7 @@ export function App() {
           <Navbar.Brand href="#profil/" style={{ paddingLeft: "15px" }}>
             {api.self.loginName}
           </Navbar.Brand>
-          
+
           <Nav className="mr-auto">
             <Nav.Link className="navlink" href="#profil/">
               Profil
@@ -78,16 +101,18 @@ export function App() {
             <Nav.Link className="navlink" href="#game">
               Game
             </Nav.Link>
+            <Nav.Link className="navlink" href="#discord">
+              Nycaria
+            </Nav.Link>
             {api.permissionId === 0 && (
               <Nav.Link href="#test/">Administration</Nav.Link>
             )}
-          
           </Nav>
           <Nav>
-          <NavDropdown title="?" id="drpdown">
+            <NavDropdown title="?" id="drpdown">
               <NavDropdown.Item
                 onClick={() => {
-                  setShow(true)
+                  setShow(true);
                 }}
               >
                 Delete Data
@@ -110,9 +135,7 @@ export function App() {
                 Logout
               </Button>
             </ButtonGroup>
-
           </div>
-          
         </Navbar>
         {/** https://github.com/ReactTraining/react-router/issues/5455#issuecomment-346502188 */}
         <Route
@@ -137,6 +160,12 @@ export function App() {
                   key={"profil_id"}
                 />
                 <Route exact path={"/game"} component={Game} key={"game"} />
+                <Route
+                  exact
+                  path={"/discord"}
+                  component={Discord}
+                  key={"discord"}
+                />
               </Switch>
             );
           }}

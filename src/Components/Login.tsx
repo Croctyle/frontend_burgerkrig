@@ -32,8 +32,8 @@ export function Login(props: ILoginProps) {
   };
 
   const onRegister = async () => {
-    if (username.length === 0 || password.length === 0) return;
-    let i = await api.register(username, password, burger);
+    if (registerUsername.length === 0 || registerPassword.length === 0) return;
+    let i = await api.register(registerUsername, registerUsername, burger);
     if (!i.data) {
       setRegisterError("Name already taken!");
     } else {
